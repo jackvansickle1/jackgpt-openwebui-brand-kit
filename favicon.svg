@@ -1,0 +1,25 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JackGPT">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="20" x2="420" y2="492" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"/>
+      <stop offset="0.48" stop-color="#07101F"/>
+      <stop offset="1" stop-color="#04070F"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="118" y1="96" x2="394" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6BE4FF"/>
+      <stop offset="1" stop-color="#67F7BE"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.42 0 0 0 0 0.89 0 0 0 0 1 0 0 0 0.8 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <path d="M95 146C132 96 192 68 258 70c91 3 165 70 175 158 9 84-39 158-115 190" fill="none" stroke="url(#stroke)" stroke-width="24" stroke-linecap="round" opacity="0.9" filter="url(#glow)"/>
+  <path d="M279 128v181c0 58-37 91-91 91-36 0-66-15-85-42l43-39c9 16 23 25 42 25 24 0 38-14 38-43V128h53Z" fill="#F3F7FF"/>
+  <path d="M311 181h92M311 249h74M311 317h49" stroke="#67F7BE" stroke-width="22" stroke-linecap="round"/>
+</svg>

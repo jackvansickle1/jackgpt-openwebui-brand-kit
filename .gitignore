@@ -1,0 +1,6 @@
+.env
+*.log
+data/
+database/
+*.db
+

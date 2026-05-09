@@ -1,0 +1,30 @@
+{
+  "name": "JackGPT",
+  "short_name": "JackGPT",
+  "description": "JackGPT is a self-hosted AI workspace for chat, search, files, and local model workflows.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#05070f",
+  "background_color": "#05070f",
+  "icons": [
+    {
+      "src": "/static/logo.png",
+      "type": "image/png",
+      "sizes": "500x500",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/logo.png",
+      "type": "image/png",
+      "sizes": "500x500",
+      "purpose": "maskable"
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "text": "shared"
+    }
+  }
+}
