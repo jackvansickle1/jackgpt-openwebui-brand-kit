@@ -1,6 +1,6 @@
 (function () {
   const APP_NAME = "JackGPT";
-  const BRAND_VERSION = "jackgpt-20260521-ops-onboarding-c";
+  const BRAND_VERSION = "jackgpt-20260521-ops-onboarding-d";
   const asset = (path) => `${path}?v=${BRAND_VERSION}`;
   const BRAND_ASSETS = {
     css: asset("/static/custom.css"),
@@ -258,7 +258,7 @@
       panel.style.setProperty("top", "auto", "important");
       panel.style.setProperty("bottom", "max(12px, env(safe-area-inset-bottom))", "important");
       panel.style.setProperty("width", "auto", "important");
-      panel.style.setProperty("max-height", "min(38dvh, 320px)", "important");
+      panel.style.setProperty("max-height", "min(20dvh, 166px)", "important");
       panel.style.setProperty("padding", "14px", "important");
     } else {
       for (const property of ["left", "right", "top", "bottom", "width", "max-height", "padding"]) {

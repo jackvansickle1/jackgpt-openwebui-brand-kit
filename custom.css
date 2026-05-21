@@ -330,7 +330,7 @@ input:focus,
   .jackgpt-onboarding-panel {
     inset: auto max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
     width: auto;
-    max-height: min(38dvh, 320px);
+    max-height: min(20dvh, 166px);
     padding: 14px;
   }
 
