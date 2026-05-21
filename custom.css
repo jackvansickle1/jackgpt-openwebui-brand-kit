@@ -330,7 +330,22 @@ input:focus,
   .jackgpt-onboarding-panel {
     inset: auto max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
     width: auto;
-    max-height: min(58dvh, 520px);
+    max-height: min(38dvh, 320px);
+    padding: 14px;
+  }
+
+  .jackgpt-onboarding-panel h2 {
+    margin-right: 36px;
+    font-size: 1.08rem;
+  }
+
+  .jackgpt-onboarding-panel p,
+  .jackgpt-onboarding-prompts button {
+    font-size: 0.82rem;
+  }
+
+  .jackgpt-onboarding-prompts {
+    margin: 11px 0;
   }
 }
 
