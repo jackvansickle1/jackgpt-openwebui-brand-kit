@@ -1,6 +1,6 @@
 (function () {
   const APP_NAME = "JackGPT";
-  const BRAND_VERSION = "jackgpt-20260521-ops-onboarding";
+  const BRAND_VERSION = "jackgpt-20260521-ops-onboarding-b";
   const asset = (path) => `${path}?v=${BRAND_VERSION}`;
   const BRAND_ASSETS = {
     css: asset("/static/custom.css"),
