@@ -1,6 +1,6 @@
 (function () {
   const APP_NAME = "JackGPT";
-  const BRAND_VERSION = "jackgpt-20260509j";
+  const BRAND_VERSION = "jackgpt-20260521-ops-onboarding";
   const asset = (path) => `${path}?v=${BRAND_VERSION}`;
   const BRAND_ASSETS = {
     css: asset("/static/custom.css"),
@@ -242,6 +242,74 @@
     document.body.appendChild(badge);
   };
 
+  const onboardingPrompts = [
+    "Show me the best way for a recruiter to tour the JackGPT ecosystem.",
+    "Search the web for today's AI infrastructure news and summarize it with sources.",
+    "Generate a polished image prompt for a recruiter-facing product mockup.",
+    "Explain how Market Desk combines public data, AI summaries, and graceful fallback logic."
+  ];
+
+  const shouldShowOnboarding = () => {
+    const hasPasswordInput = !!document.querySelector('input[type="password"]');
+    const hasComposer = !!document.querySelector("textarea, [role='textbox'], [contenteditable='true']");
+    const text = (document.body.textContent || "").replace(/\s+/g, " ");
+    return hasPasswordInput || (!hasComposer && /sign in|sign up|create account|email/i.test(text));
+  };
+
+  const addOnboardingPanel = () => {
+    const existing = document.querySelector(".jackgpt-onboarding-panel");
+    if (!shouldShowOnboarding()) {
+      existing?.remove();
+      return;
+    }
+    if (sessionStorage.jackgptOnboardingHidden === "true") {
+      existing?.remove();
+      return;
+    }
+    if (existing) return;
+
+    const panel = document.createElement("aside");
+    panel.className = "jackgpt-onboarding-panel";
+    panel.setAttribute("aria-label", "JackGPT AI Workspace onboarding");
+    panel.innerHTML = `
+      <button class="jackgpt-onboarding-close" type="button" aria-label="Hide onboarding">x</button>
+      <span class="jackgpt-onboarding-kicker">New here?</span>
+      <h2>Start with an account, then try the full AI workspace.</h2>
+      <p>Visitors can sign up to explore JackGPT chat, web-grounded answers, image generation, Market Desk, and the broader project ecosystem.</p>
+      <div class="jackgpt-onboarding-prompts">
+        ${onboardingPrompts.map((prompt) => `<button type="button" data-jackgpt-prompt="${encodeURIComponent(prompt)}">${prompt}</button>`).join("")}
+      </div>
+      <div class="jackgpt-onboarding-links">
+        <a href="https://market.jackgpt.org" target="_blank" rel="noreferrer">Market Desk</a>
+        <a href="https://images.jackgpt.org" target="_blank" rel="noreferrer">Image Gen</a>
+        <a href="https://jackgpt.org" target="_blank" rel="noreferrer">Portfolio</a>
+      </div>
+    `;
+    panel.querySelector(".jackgpt-onboarding-close")?.addEventListener("click", () => {
+      sessionStorage.jackgptOnboardingHidden = "true";
+      panel.remove();
+    });
+    panel.querySelectorAll("[data-jackgpt-prompt]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const prompt = decodeURIComponent(button.getAttribute("data-jackgpt-prompt") || "");
+        navigator.clipboard?.writeText(prompt).catch(() => {});
+        button.textContent = "Prompt copied";
+        window.setTimeout(() => {
+          button.textContent = prompt;
+        }, 1600);
+      });
+    });
+    document.body.appendChild(panel);
+  };
+
+  const clarifySignupLanguage = () => {
+    document.querySelectorAll("p,span,button,a,h1,h2,h3").forEach((element) => {
+      const text = (element.textContent || "").replace(/\s+/g, " ").trim();
+      if (/^Login required$/i.test(text)) element.textContent = "Sign in or create an account";
+      if (/^Don't have an account\?$/i.test(text)) element.textContent = "Need access? Create an account.";
+    });
+  };
+
   const clearStaleBrandingCaches = () => {
     if (localStorage.jackgptBrandVersion === BRAND_VERSION) return;
     localStorage.jackgptBrandVersion = BRAND_VERSION;
@@ -270,6 +338,8 @@
     dismissUpstreamReleaseModal();
     cleanFooterVersion();
     addBrandBadge();
+    clarifySignupLanguage();
+    addOnboardingPanel();
   };
 
   const boot = () => {
